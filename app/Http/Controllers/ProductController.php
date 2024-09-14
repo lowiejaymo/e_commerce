@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index(Request $request)
     {
         
@@ -23,20 +21,15 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         return view('products.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        // Validate the request data
         $request->validate([
             'product_name' => 'required|min:5|unique:products,product_name',
             'price' => 'required|numeric|min:0',
@@ -64,20 +57,12 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success_product_added', $product->product_name);
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        // Fetch the product by its ID and return a view to show it (optional)
         $product = Product::findOrFail($id);
         return view('products.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         // Fetch the product by its ID and return a view to edit it
@@ -85,12 +70,8 @@ class ProductController extends Controller
         return view('products.edit', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        // Validate the request data
         $request->validate([
             'product_name' => 'required|min:3|unique:products,product_name,' . $id,
             'price' => 'required|numeric|min:0',
@@ -124,9 +105,6 @@ class ProductController extends Controller
         return redirect()->route('products.show', $product->id)->with('update_product_information', 'Product information has been updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);

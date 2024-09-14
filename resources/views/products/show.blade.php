@@ -75,12 +75,6 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById('delete-form').submit();
-
-                Swal.fire({
-                    title: 'Deleted!',
-                    text: 'Your product has been deleted.',
-                    icon: 'success'
-                });
             }
         });
     });
