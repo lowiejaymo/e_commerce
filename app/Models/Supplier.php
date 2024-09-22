@@ -9,16 +9,7 @@ class Supplier extends Model
 {
     use HasFactory;
 
-    protected $table = 'suppliers';
+    protected $primaryKey = 'supplier_id'; 
 
-    protected $fillable = [
-        'name',
-        'contact_info',
-    ];
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class);
-    }
+    protected $fillable = ['supplier_id', 'name', 'contact_num', 'address', 'email']; 
 }
-

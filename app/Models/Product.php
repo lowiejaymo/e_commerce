@@ -15,13 +15,21 @@ class Product extends Model
         'product_name',
         'description',
         'price',
+        'product_discount',
         'stock',
-        'product_image'
+        'product_image',
+        'supplier_id',
+        'category_id',
     ];
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
+
+    }
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id');
     }
 
     public function suppliers()
@@ -38,6 +46,9 @@ class Product extends Model
     public function isInStock()
     {
         return $this->stock > 0;
-        
+
     }
+
+
+
 }
